@@ -1,0 +1,39 @@
+Source: libpthread-stubs
+Priority: optional
+Section: libdevel
+Maintainer: XCB Developers <xcb@lists.freedesktop.org>
+Uploaders: Jamey Sharp <sharpone@debian.org>, Josh Triplett <josh@freedesktop.org>
+Build-Depends: cdbs (>= 0.4.40), debhelper (>= 5.0.0)
+Standards-Version: 3.7.2
+XS-X-Vcs-Git: git://anongit.freedesktop.org/git/xcb/pthread-stubs
+
+Package: libpthread-stubs0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: pthread stubs not provided by native libc
+ This library provides weak aliases for pthread functions not provided
+ in libc or otherwise available by default.  Libraries like libxcb rely
+ on pthread stubs to use pthreads optionally, becoming thread-safe when
+ linked to libpthread, while avoiding any performance hit when running
+ single-threaded. libpthread-stubs supports this behavior even on
+ platforms which do not supply all the necessary pthread stubs.  On
+ platforms which already supply all the necessary pthread stubs, this
+ package has no content.
+
+Package: libpthread-stubs0-dev
+Section: libdevel
+Architecture: any
+Depends: libpthread-stubs0 (= ${Source-Version})
+Description: pthread stubs not provided by native libc, development files
+ This library provides weak aliases for pthread functions not provided
+ in libc or otherwise available by default.  Libraries like libxcb rely
+ on pthread stubs to use pthreads optionally, becoming thread-safe when
+ linked to libpthread, while avoiding any performance hit when running
+ single-threaded. libpthread-stubs supports this behavior even on
+ platforms which do not supply all the necessary pthread stubs.
+ .
+ On platforms which already supply all the necessary pthread stubs, this
+ package ships only the pkg-config file pthread-stubs.pc, to allow
+ libraries to unconditionally express a dependency on pthread-stubs and
+ still obtain correct behavior.
