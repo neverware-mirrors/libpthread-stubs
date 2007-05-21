@@ -1,3 +1,10 @@
+libpthread-stubs (0.1-2) unstable; urgency=low
+
+  * Add XS-Vcs-Git and XS-Vcs-Browser fields.
+  * Upload to unstable.
+
+ -- Josh Triplett <josh@freedesktop.org>  Mon, 21 May 2007 14:00:38 -0700
+
 libpthread-stubs (0.1-1) experimental; urgency=low
 
   * Initial release.
