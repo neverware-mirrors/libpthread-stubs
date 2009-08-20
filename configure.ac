@@ -31,7 +31,7 @@ fi
 
 
 PKG_CONFIG_LIBS=
-AC_CHECK_FUNCS([pthread_self pthread_mutex_init pthread_mutex_destroy pthread_mutex_lock pthread_mutex_unlock pthread_cond_init pthread_cond_destroy pthread_cond_wait pthread_cond_signal pthread_cond_broadcast pthread_equal],
+AC_CHECK_FUNCS([pthread_self pthread_mutex_init pthread_mutex_destroy pthread_mutex_lock pthread_mutex_unlock pthread_cond_init pthread_cond_destroy pthread_cond_wait pthread_cond_signal pthread_cond_broadcast pthread_equal sem_init sem_destroy sem_wait sem_trywait],
 	       [], [PKG_CONFIG_LIBS='-L${libdir} -lpthread-stubs'])
 AC_SUBST([PKG_CONFIG_LIBS])
 AM_CONDITIONAL(BUILD_LIB, test "x$PKG_CONFIG_LIBS" != x)
