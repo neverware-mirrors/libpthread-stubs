@@ -25,8 +25,6 @@
  */
 
 #include <pthread.h>
-#include <errno.h>
-#include <semaphore.h>
 #include "config.h"
 
 #ifndef HAVE_PTHREAD_SELF
@@ -128,51 +126,6 @@ int pthread_equal() __attribute__ ((weak, alias ("__pthread_equal_stub")));
 # endif
 #endif
 
-#ifndef HAVE_SEM_INIT
-#define NEED_SEM_INIT_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_init() __attribute__ ((weak, alias ("__sem_init_stub")));
-# else
-#  pragma weak sem_init = __sem_init_stub
-# endif
-#endif
-
-#ifndef HAVE_SEM_DESTROY
-#define NEED_ZERO_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_destroy() __attribute__ ((weak, alias ("__pthread_zero_stub")));
-# else
-#  pragma weak sem_destroy = __sem_destroy_stub
-# endif
-#endif
-
-#ifndef HAVE_SEM_WAIT
-#define NEED_SEM_WAIT_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_wait() __attribute__ ((weak, alias ("__sem_wait_stub")));
-# else
-#  pragma weak sem_wait = __sem_wait_stub
-# endif
-#endif
-
-#ifndef HAVE_SEM_TRYWAIT
-#define NEED_SEM_TRYWAIT_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_trywait() __attribute__ ((weak, alias ("__sem_trywait_stub")));
-# else
-#  pragma weak sem_trywait = __sem_trywait_stub
-# endif
-#endif
-
-#ifndef HAVE_SEM_POST
-#define NEED_SEM_POST_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_post() __attribute__ ((weak, alias ("__sem_post_stub")));
-# else
-#  pragma weak sem_post = __sem_post_stub
-# endif
-#endif
-
 #ifdef NEED_ZERO_STUB
 static int __pthread_zero_stub()
 {
@@ -184,61 +137,5 @@ static int __pthread_zero_stub()
 static int __pthread_equal_stub(pthread_t t1, pthread_t t2)
 {
     return (t1 == t2);
-}
-#endif
-
-#ifdef NEED_SEM_INIT_STUB
-static int __sem_init_stub(sem_t *_sem, int pshared, unsigned int value)
-{
-    unsigned int *sem = (unsigned int *) _sem;
-    if (pshared) {
-	errno = ENOSYS;
-	return -1;
-    }
-
-    if (sizeof(sem_t) < sizeof(unsigned int)) {
-	errno = ENOSYS;
-	return -1;
-    }
-
-    *sem = value;
-    return 0;
-}
-#endif
-
-#ifdef NEED_SEM_WAIT_STUB
-static int __sem_wait_stub(sem_t *_sem)
-{
-    unsigned int *sem = (unsigned int *) _sem;
-    if (!*sem) {
-	/* Not available, simulate a blocking sem_wait */
-	pause();
-	errno = EINTR;
-	return -1;
-    }
-    *sem--;
-    return 0;
-}
-#endif
-
-#ifdef NEED_SEM_TRYWAIT_STUB
-static int __sem_trywait_stub(sem_t *_sem)
-{
-    unsigned int *sem = (unsigned int *) _sem;
-    if (!*sem) {
-	errno = EAGAIN;
-	return -1;
-    }
-    *sem--;
-    return 0;
-}
-#endif
-
-#ifdef NEED_SEM_POST_STUB
-static int __sem_post_stub(sem_t *_sem)
-{
-    unsigned int *sem = (unsigned int *) _sem;
-    *sem++;
-    return 0;
 }
 #endif
