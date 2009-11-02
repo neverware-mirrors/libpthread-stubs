@@ -157,7 +157,7 @@ int pthread_equal() __attribute__ ((weak, alias ("__pthread_equal_stub")));
 #ifndef HAVE_PTHREAD_EXIT
 #define NEED_EXIT_STUB
 # ifdef SUPPORT_ATTRIBUTE_ALIAS
-int pthread_exit() __attribute__ ((weak, alias ("__pthread_exit_stub")));
+void pthread_exit() __attribute__ ((weak, alias ("__pthread_exit_stub")));
 # else
 #  pragma weak pthread_exit = __pthread_exit_stub
 # endif
