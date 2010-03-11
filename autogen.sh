@@ -6,6 +6,8 @@ test -z "$srcdir" && srcdir=.
 ORIGDIR=`pwd`
 cd $srcdir
 
+m4 -P stubs.c.m4 >stubs.c
+
 autoreconf -v --install || exit 1
 cd $ORIGDIR || exit $?
 
