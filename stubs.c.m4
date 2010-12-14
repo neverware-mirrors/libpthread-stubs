@@ -79,7 +79,7 @@ static pthread_t __pthread_self_stub(void)
 #ifdef NEED_EQUAL_STUB
 static int __pthread_equal_stub(pthread_t t1, pthread_t t2)
 {
-    return (t1 == t2);
+    return 1;
 }
 #endif
 
