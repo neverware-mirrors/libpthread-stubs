@@ -47,6 +47,7 @@ m4_divert(0)m4_dnl
 
 #include <pthread.h>
 #include <stdlib.h>
+#include <string.h>
 #include "config.h"
 
 m4_include([list.m4])
@@ -62,6 +63,16 @@ static int __pthread_zero_stub()
 static int __pthread_abort_stub()
 {
     abort();
+}
+#endif
+
+#ifdef NEED_SELF_STUB
+static pthread_t __pthread_self_stub(void)
+{
+    pthread_t th;
+
+    memset(&th, 0, sizeof (th));
+    return th;
 }
 #endif
 

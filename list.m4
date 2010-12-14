@@ -1,4 +1,4 @@
-alias(zero,	int,  pthread_self)
+alias(self,	pthread_t,  pthread_self)
 alias(zero,	int,  pthread_mutex_init)
 alias(zero,	int,  pthread_mutex_destroy)
 alias(zero,	int,  pthread_mutex_lock)
