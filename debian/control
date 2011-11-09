@@ -22,6 +22,14 @@ Description: pthread stubs not provided by native libc
  platforms which already supply all the necessary pthread stubs, this
  package has no content.
 
+Package: libpthread-stubs0-udeb
+Section: debian-installer
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Package-Type: udeb
+Description: pthread stubs not provided by native libc - udeb
+ This is a udeb, or a microdeb, for the debian-installer.
+
 Package: libpthread-stubs0-dev
 Section: libdevel
 Architecture: any

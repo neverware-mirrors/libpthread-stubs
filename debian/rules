@@ -6,6 +6,7 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/autotools.mk
 
 DEB_CONFIGURE_EXTRA_FLAGS=--prefix=/
+DEB_DH_MAKESHLIBS_ARGS_libpthread-stubs0=--add-udeb=libpthread-stubs0-udeb
 
 debian/copyright: debian/copyright.debian COPYING
 	cat $+ > $@
@@ -16,6 +17,10 @@ clean::
 common-install-prehook-arch common-install-prehook-indep:: debian/copyright
 
 install/libpthread-stubs0::
+	if test -f debian/tmp/lib/libpthread-stubs.so.0.0.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0.0.0; fi
+	if test -L debian/tmp/lib/libpthread-stubs.so.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0; fi
+
+install/libpthread-stubs0-udeb::
 	if test -f debian/tmp/lib/libpthread-stubs.so.0.0.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0.0.0; fi
 	if test -L debian/tmp/lib/libpthread-stubs.so.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0; fi
 

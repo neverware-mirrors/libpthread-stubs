@@ -1,3 +1,10 @@
+libpthread-stubs (0.3-2.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Add libpthread-stubs-udeb (Closes: #620946)
+
+ -- Samuel Thibault <sthibault@debian.org>  Mon, 13 Jun 2011 22:01:38 +0000
+
 libpthread-stubs (0.3-2) unstable; urgency=low
 
   * Fix bogus symlink (Closes: #556222)
