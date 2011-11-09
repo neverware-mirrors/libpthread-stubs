@@ -7,6 +7,11 @@ libpthread-stubs (0.3-3) UNRELEASED; urgency=low
   * Point Vcs-{Git,Browser} at collab-maint.
   * Remove Jamey Sharp from Uploaders (closes: #568281).
   * Remove Josh Triplett from Uploaders.
+  * Use dh instead of cdbs.  In the process (and in order to be able to test
+    it), make the package actually buildable on hurd, which doesn't have the
+    stubs in libc, but whose libc.so pulls in libpthread-stubs.so, defeating
+    our configure checks; so make the build find an empty libpthread-stubs.so
+    instead of the system one.
   
   [ Samuel Thibault ]
   * Fix pthread_exit prototype (closes: #622148).
