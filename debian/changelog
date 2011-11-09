@@ -1,3 +1,11 @@
+libpthread-stubs (0.3-1) unstable; urgency=low
+
+  * New upstream release
+    + Revert sem_ symbols (Closes: #548240)
+  * Move static stuff in /usr/lib (Closes: #548109)
+
+ -- Julien Danjou <acid@debian.org>  Wed, 14 Oct 2009 11:18:06 +0200
+
 libpthread-stubs (0.2-1) unstable; urgency=low
 
   * New upstream release
