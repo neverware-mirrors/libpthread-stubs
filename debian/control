@@ -3,7 +3,7 @@ Priority: optional
 Section: libdevel
 Maintainer: XCB Developers <xcb@lists.freedesktop.org>
 Uploaders: Jamey Sharp <sharpone@debian.org>, Josh Triplett <josh@freedesktop.org>, Julien Danjou <acid@debian.org>
-Build-Depends: cdbs (>= 0.4.40), debhelper (>= 5.0.0)
+Build-Depends: cdbs (>= 0.4.93), debhelper (>= 8.1.3)
 Standards-Version: 3.8.3
 XS-Vcs-Git: git://anongit.freedesktop.org/git/xcb/pthread-stubs
 XS-Vcs-Browser: http://gitweb.freedesktop.org/?p=xcb/pthread-stubs.git
@@ -11,6 +11,8 @@ XS-Vcs-Browser: http://gitweb.freedesktop.org/?p=xcb/pthread-stubs.git
 Package: libpthread-stubs0
 Section: libs
 Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: pthread stubs not provided by native libc
  This library provides weak aliases for pthread functions not provided
@@ -33,6 +35,7 @@ Description: pthread stubs not provided by native libc - udeb
 Package: libpthread-stubs0-dev
 Section: libdevel
 Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends}, libpthread-stubs0 (= ${binary:Version})
 Description: pthread stubs not provided by native libc, development files
  This library provides weak aliases for pthread functions not provided

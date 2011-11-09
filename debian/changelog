@@ -1,3 +1,10 @@
+libpthread-stubs (0.3-3) UNRELEASED; urgency=low
+
+  [ Steve Langasek ]
+  * Build for multiarch.  Closes: #632555.
+
+ -- Julien Cristau <jcristau@debian.org>  Wed, 09 Nov 2011 21:49:55 +0100
+
 libpthread-stubs (0.3-2.1) unstable; urgency=low
 
   * Non-maintainer upload.

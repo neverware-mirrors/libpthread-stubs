@@ -5,7 +5,7 @@ DEB_DH_INSTALL_SOURCEDIR=debian/tmp
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/autotools.mk
 
-DEB_CONFIGURE_EXTRA_FLAGS=--prefix=/
+DEB_CONFIGURE_EXTRA_FLAGS=--prefix=/ --libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH)
 DEB_DH_MAKESHLIBS_ARGS_libpthread-stubs0=--add-udeb=libpthread-stubs0-udeb
 
 debian/copyright: debian/copyright.debian COPYING
@@ -17,13 +17,13 @@ clean::
 common-install-prehook-arch common-install-prehook-indep:: debian/copyright
 
 install/libpthread-stubs0::
-	if test -f debian/tmp/lib/libpthread-stubs.so.0.0.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0.0.0; fi
-	if test -L debian/tmp/lib/libpthread-stubs.so.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0; fi
+	if test -f debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0.0.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0.0.0; fi
+	if test -L debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0; fi
 
 install/libpthread-stubs0-udeb::
-	if test -f debian/tmp/lib/libpthread-stubs.so.0.0.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0.0.0; fi
-	if test -L debian/tmp/lib/libpthread-stubs.so.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0; fi
+	if test -f debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0.0.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0.0.0 lib; fi
+	if test -L debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0 lib; fi
 
 install/libpthread-stubs0-dev::
-	if test -f debian/tmp/lib/libpthread-stubs.a; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.a usr/lib; ln -s /lib/libpthread-stubs.so.0.0.0 debian/libpthread-stubs0-dev/usr/lib/libpthread-stubs.so; fi
-	dh_install -p$(cdbs_curpkg) debian/tmp/lib/pkgconfig/pthread-stubs.pc usr/share/pkgconfig/
+	if test -f debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.a; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.a usr/lib/$(DEB_HOST_MULTIARCH); ln -s /lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so.0.0.0 debian/libpthread-stubs0-dev/usr/lib/$(DEB_HOST_MULTIARCH)/libpthread-stubs.so; fi
+	dh_install -p$(cdbs_curpkg) debian/tmp/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/pthread-stubs.pc usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/
