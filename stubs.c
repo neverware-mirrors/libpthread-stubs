@@ -25,8 +25,7 @@
  */
 
 #include <pthread.h>
-#include <errno.h>
-#include <semaphore.h>
+#include <stdlib.h>
 #include "config.h"
 
 #ifndef HAVE_PTHREAD_SELF
@@ -92,12 +91,39 @@ int pthread_cond_destroy() __attribute__ ((weak, alias ("__pthread_zero_stub")))
 # endif
 #endif
 
-#ifndef HAVE_PTHREAD_COND_WAIT
+#ifndef HAVE_PTHREAD_CONDATTR_INIT
 #define NEED_ZERO_STUB
 # ifdef SUPPORT_ATTRIBUTE_ALIAS
-int pthread_cond_wait() __attribute__ ((weak, alias ("__pthread_zero_stub")));
+int pthread_condattr_init() __attribute__ ((weak, alias ("__pthread_zero_stub")));
 # else
-#  pragma weak pthread_cond_wait = __pthread_zero_stub
+#  pragma weak pthread_condattr_init = __pthread_zero_stub
+# endif
+#endif
+
+#ifndef HAVE_PTHREAD_CONDATTR_DESTROY
+#define NEED_ZERO_STUB
+# ifdef SUPPORT_ATTRIBUTE_ALIAS
+int pthread_condattr_destroy() __attribute__ ((weak, alias ("__pthread_zero_stub")));
+# else
+#  pragma weak pthread_condattr_destroy = __pthread_zero_stub
+# endif
+#endif
+
+#ifndef HAVE_PTHREAD_COND_WAIT
+#define NEED_ABORT_STUB
+# ifdef SUPPORT_ATTRIBUTE_ALIAS
+int pthread_cond_wait() __attribute__ ((weak, alias ("__pthread_abort_stub")));
+# else
+#  pragma weak pthread_cond_wait = __pthread_abort_stub
+# endif
+#endif
+
+#ifndef HAVE_PTHREAD_COND_TIMEDWAIT
+#define NEED_ABORT_STUB
+# ifdef SUPPORT_ATTRIBUTE_ALIAS
+int pthread_cond_timedwait() __attribute__ ((weak, alias ("__pthread_abort_stub")));
+# else
+#  pragma weak pthread_cond_timedwait = __pthread_abort_stub
 # endif
 #endif
 
@@ -128,48 +154,12 @@ int pthread_equal() __attribute__ ((weak, alias ("__pthread_equal_stub")));
 # endif
 #endif
 
-#ifndef HAVE_SEM_INIT
-#define NEED_SEM_INIT_STUB
+#ifndef HAVE_PTHREAD_EXIT
+#define NEED_EXIT_STUB
 # ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_init() __attribute__ ((weak, alias ("__sem_init_stub")));
+int pthread_exit() __attribute__ ((weak, alias ("__pthread_exit_stub")));
 # else
-#  pragma weak sem_init = __sem_init_stub
-# endif
-#endif
-
-#ifndef HAVE_SEM_DESTROY
-#define NEED_ZERO_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_destroy() __attribute__ ((weak, alias ("__pthread_zero_stub")));
-# else
-#  pragma weak sem_destroy = __sem_destroy_stub
-# endif
-#endif
-
-#ifndef HAVE_SEM_WAIT
-#define NEED_SEM_WAIT_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_wait() __attribute__ ((weak, alias ("__sem_wait_stub")));
-# else
-#  pragma weak sem_wait = __sem_wait_stub
-# endif
-#endif
-
-#ifndef HAVE_SEM_TRYWAIT
-#define NEED_SEM_TRYWAIT_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_trywait() __attribute__ ((weak, alias ("__sem_trywait_stub")));
-# else
-#  pragma weak sem_trywait = __sem_trywait_stub
-# endif
-#endif
-
-#ifndef HAVE_SEM_POST
-#define NEED_SEM_POST_STUB
-# ifdef SUPPORT_ATTRIBUTE_ALIAS
-int sem_post() __attribute__ ((weak, alias ("__sem_post_stub")));
-# else
-#  pragma weak sem_post = __sem_post_stub
+#  pragma weak pthread_exit = __pthread_exit_stub
 # endif
 #endif
 
@@ -180,6 +170,13 @@ static int __pthread_zero_stub()
 }
 #endif
 
+#ifdef NEED_ABORT_STUB
+static int __pthread_abort_stub()
+{
+    abort();
+}
+#endif
+
 #ifdef NEED_EQUAL_STUB
 static int __pthread_equal_stub(pthread_t t1, pthread_t t2)
 {
@@ -187,58 +184,9 @@ static int __pthread_equal_stub(pthread_t t1, pthread_t t2)
 }
 #endif
 
-#ifdef NEED_SEM_INIT_STUB
-static int __sem_init_stub(sem_t *_sem, int pshared, unsigned int value)
+#ifdef NEED_EXIT_STUB
+static void __pthread_exit_stub(void *ret)
 {
-    unsigned int *sem = (unsigned int *) _sem;
-    if (pshared) {
-	errno = ENOSYS;
-	return -1;
-    }
-
-    if (sizeof(sem_t) < sizeof(unsigned int)) {
-	errno = ENOSYS;
-	return -1;
-    }
-
-    *sem = value;
-    return 0;
-}
-#endif
-
-#ifdef NEED_SEM_WAIT_STUB
-static int __sem_wait_stub(sem_t *_sem)
-{
-    unsigned int *sem = (unsigned int *) _sem;
-    if (!*sem) {
-	/* Not available, simulate a blocking sem_wait */
-	pause();
-	errno = EINTR;
-	return -1;
-    }
-    *sem--;
-    return 0;
-}
-#endif
-
-#ifdef NEED_SEM_TRYWAIT_STUB
-static int __sem_trywait_stub(sem_t *_sem)
-{
-    unsigned int *sem = (unsigned int *) _sem;
-    if (!*sem) {
-	errno = EAGAIN;
-	return -1;
-    }
-    *sem--;
-    return 0;
-}
-#endif
-
-#ifdef NEED_SEM_POST_STUB
-static int __sem_post_stub(sem_t *_sem)
-{
-    unsigned int *sem = (unsigned int *) _sem;
-    *sem++;
-    return 0;
+    exit(EXIT_SUCCESS);
 }
 #endif
