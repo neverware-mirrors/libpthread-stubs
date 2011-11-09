@@ -5,6 +5,7 @@ libpthread-stubs (0.3-3) UNRELEASED; urgency=low
 
   [ Julien Cristau ]
   * Point Vcs-{Git,Browser} at collab-maint.
+  * Remove Jamey Sharp from Uploaders (closes: #568281).
 
  -- Julien Cristau <jcristau@debian.org>  Wed, 09 Nov 2011 21:49:55 +0100
 
