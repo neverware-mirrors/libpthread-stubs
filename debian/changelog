@@ -1,3 +1,15 @@
+libpthread-stubs (0.2-1) unstable; urgency=low
+
+  * New upstream release
+    + Provides sem function (Closes: #495229)
+  * Add myself as uploader
+  * Bump standard version
+  * Move lib into /lib (Closes: #480237)
+  * Add copyrights
+  * Fix substvars in debian/control
+
+ -- Julien Danjou <acid@debian.org>  Wed, 23 Sep 2009 10:34:09 +0200
+
 libpthread-stubs (0.1-2) unstable; urgency=low
 
   * Add XS-Vcs-Git and XS-Vcs-Browser fields.

@@ -2,9 +2,9 @@ Source: libpthread-stubs
 Priority: optional
 Section: libdevel
 Maintainer: XCB Developers <xcb@lists.freedesktop.org>
-Uploaders: Jamey Sharp <sharpone@debian.org>, Josh Triplett <josh@freedesktop.org>
+Uploaders: Jamey Sharp <sharpone@debian.org>, Josh Triplett <josh@freedesktop.org>, Julien Danjou <acid@debian.org>
 Build-Depends: cdbs (>= 0.4.40), debhelper (>= 5.0.0)
-Standards-Version: 3.7.2
+Standards-Version: 3.8.3
 XS-Vcs-Git: git://anongit.freedesktop.org/git/xcb/pthread-stubs
 XS-Vcs-Browser: http://gitweb.freedesktop.org/?p=xcb/pthread-stubs.git
 
@@ -25,7 +25,7 @@ Description: pthread stubs not provided by native libc
 Package: libpthread-stubs0-dev
 Section: libdevel
 Architecture: any
-Depends: libpthread-stubs0 (= ${Source-Version})
+Depends: ${misc:Depends}, libpthread-stubs0 (= ${binary:Version})
 Description: pthread stubs not provided by native libc, development files
  This library provides weak aliases for pthread functions not provided
  in libc or otherwise available by default.  Libraries like libxcb rely
