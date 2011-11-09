@@ -20,5 +20,5 @@ install/libpthread-stubs0::
 	if test -L debian/tmp/lib/libpthread-stubs.so.0; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.so.0; fi
 
 install/libpthread-stubs0-dev::
-	if test -f debian/tmp/lib/libpthread-stubs.a; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.a usr/lib; ln -s /lib/libpthread-stubs.0.0.0 debian/libpthread-stubs0-dev/usr/lib/libpthread-stubs.so; fi
+	if test -f debian/tmp/lib/libpthread-stubs.a; then dh_install -p$(cdbs_curpkg) debian/tmp/lib/libpthread-stubs.a usr/lib; ln -s /lib/libpthread-stubs.so.0.0.0 debian/libpthread-stubs0-dev/usr/lib/libpthread-stubs.so; fi
 	dh_install -p$(cdbs_curpkg) debian/tmp/lib/pkgconfig/pthread-stubs.pc usr/share/pkgconfig/
