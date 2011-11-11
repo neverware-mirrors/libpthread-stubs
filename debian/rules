@@ -6,16 +6,15 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 %:
 	dh $@ --with autoreconf --builddirectory=build
 
-build-arch: debian/copyright
-build: build-arch build-indep
-
+override_dh_auto_configure: debian/copyright
 ifeq ($(DEB_HOST_ARCH_OS), hurd)
-override_dh_auto_configure:
 	# libc.so pulls in libpthread-stubs.so, defeating our configure checks
 	# by making them think the stubs are already in libc.  Point ld at an
 	# empty libpthread-stubs instead.
 	echo 'OUTPUT_FORMAT(elf32-i386)' > debian/libpthread-stubs.so
 	LDFLAGS='-L$(CURDIR)/debian' dh_auto_configure --builddirectory=build
+else
+	dh_auto_configure --builddirectory=build
 endif
 
 override_dh_makeshlibs:
