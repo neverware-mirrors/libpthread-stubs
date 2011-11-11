@@ -18,7 +18,9 @@ else
 endif
 
 override_dh_makeshlibs:
+ifeq ($(DEB_HOST_ARCH_OS), hurd)
 	dh_makeshlibs -plibpthread-stubs0 --add-udeb=libpthread-stubs0-udeb
+endif
 
 override_dh_auto_install:
 	dh_auto_install --builddirectory=build
