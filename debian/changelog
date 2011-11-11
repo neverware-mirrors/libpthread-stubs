@@ -7,6 +7,9 @@ libpthread-stubs (0.3-3) UNRELEASED; urgency=low
   * Point Vcs-{Git,Browser} at collab-maint.
   * Remove Jamey Sharp from Uploaders (closes: #568281).
   * Remove Josh Triplett from Uploaders.
+  
+  [ Samuel Thibault ]
+  * Fix pthread_exit prototype (closes: #622148).
 
  -- Julien Cristau <jcristau@debian.org>  Wed, 09 Nov 2011 21:49:55 +0100
 
