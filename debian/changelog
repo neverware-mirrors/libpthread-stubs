@@ -1,6 +1,6 @@
 libpthread-stubs (0.3-4) UNRELEASED; urgency=low
 
-  * Stop building libpthread-stubs0{,-udeb} on non-hurd-i386.
+  * Stop building libpthread-stubs0{,-udeb} (closes: 706865).
 
  -- Julien Cristau <jcristau@debian.org>  Fri, 11 Nov 2011 23:31:45 +0100
 
