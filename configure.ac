@@ -4,11 +4,6 @@ AC_INIT([libpthread-stubs],
 AC_CONFIG_SRCDIR([pthread-stubs.pc.in])
 AM_INIT_AUTOMAKE([foreign dist-bzip2])
 
-AC_CONFIG_HEADERS([config.h])
-
-AC_PROG_LIBTOOL
-AC_PROG_CC
-
 dnl Check if the following functions have stubs.
 dnl See the README for specifics about the list.
 funclist="\
