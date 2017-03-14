@@ -1,5 +1,5 @@
 AC_INIT([libpthread-stubs],
-        0.3,
+        0.4,
         [xcb@lists.freedesktop.org])
 AC_CONFIG_SRCDIR([pthread-stubs.pc.in])
 AM_INIT_AUTOMAKE([foreign dist-bzip2])
