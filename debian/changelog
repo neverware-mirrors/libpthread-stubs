@@ -4,6 +4,7 @@ libpthread-stubs (0.4-1) UNRELEASED; urgency=medium
   * Change maintainer to Debian X Strike Force.
   * Update Vcs-* URLs to point to salsa.debian.org.
   * Bump debhelper compat to 11.
+  * Set source format to 1.0.
 
  -- Andreas Boll <aboll@debian.org>  Thu, 07 Feb 2019 23:29:46 +0100
 
