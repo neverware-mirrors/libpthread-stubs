@@ -2,6 +2,7 @@ libpthread-stubs (0.4-1) UNRELEASED; urgency=medium
 
   * New upstream release.
   * Change maintainer to Debian X Strike Force.
+  * Update Vcs-* URLs to point to salsa.debian.org.
 
  -- Andreas Boll <aboll@debian.org>  Thu, 07 Feb 2019 23:29:46 +0100
 
