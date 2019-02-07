@@ -4,7 +4,7 @@ Section: libdevel
 Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
 Uploaders: Julien Danjou <acid@debian.org>
 Build-Depends: debhelper (>= 11)
-Standards-Version: 3.8.3
+Standards-Version: 4.3.0
 Vcs-Git: https://salsa.debian.org/xorg-team/lib/libpthread-stubs.git
 Vcs-Browser: https://salsa.debian.org/xorg-team/lib/libpthread-stubs
 
