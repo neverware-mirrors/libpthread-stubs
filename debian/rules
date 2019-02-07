@@ -1,10 +1,7 @@
 #!/usr/bin/make -f
 
-DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
-DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
-
 %:
-	dh $@ --with autoreconf --builddirectory=build
+	dh $@ --builddirectory=build
 
 override_dh_auto_configure: debian/copyright
 	dh_auto_configure --builddirectory=build
@@ -15,4 +12,3 @@ override_dh_auto_install:
 
 debian/copyright: debian/copyright.debian COPYING
 	cat $+ > $@
-
