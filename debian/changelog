@@ -1,3 +1,9 @@
+libpthread-stubs (0.4-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Andreas Boll <aboll@debian.org>  Thu, 07 Feb 2019 23:29:46 +0100
+
 libpthread-stubs (0.3-4) unstable; urgency=low
 
   * Stop building libpthread-stubs0{,-udeb} (closes: 706865).
