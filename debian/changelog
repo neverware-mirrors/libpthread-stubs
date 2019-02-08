@@ -1,4 +1,4 @@
-libpthread-stubs (0.4-1) UNRELEASED; urgency=medium
+libpthread-stubs (0.4-1) unstable; urgency=medium
 
   * New upstream release.
   * Change maintainer to Debian X Strike Force.
@@ -8,7 +8,7 @@ libpthread-stubs (0.4-1) UNRELEASED; urgency=medium
   * Switch URLs to https.
   * Bump standards version to 4.3.0.
 
- -- Andreas Boll <aboll@debian.org>  Thu, 07 Feb 2019 23:29:46 +0100
+ -- Andreas Boll <aboll@debian.org>  Fri, 08 Feb 2019 11:40:27 +0100
 
 libpthread-stubs (0.3-4) unstable; urgency=low
 
